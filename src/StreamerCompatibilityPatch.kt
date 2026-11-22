@@ -20,7 +20,9 @@ private const val STREAMER_USER_AGENT =
 @Suppress("unused")
 val bbcIPlayerStreamerCompatibilityPatch = bytecodePatch(
     name = "Make iPlayer 1.0.1 work on more TVs",
-    description = "Lets the app start without the BBC TV feature flag and uses the Google TV Streamer model in its browser. " +
+    description = "Requires Android TV 1.0.1 (build 101), which is hard to find through ordinary APK searches. " +
+        "For the Aurora Store walkthrough, open Sources → UK TV Patches → Version.\n\n" +
+        "Lets the app start without the BBC TV feature flag and uses the Google TV Streamer model in its browser. " +
         "For use in the UK. Geographic checks and DRM still apply.",
     default = false,
 ) {
@@ -28,7 +30,14 @@ val bbcIPlayerStreamerCompatibilityPatch = bytecodePatch(
         Compatibility(
             name = "BBC iPlayer (Android TV)",
             packageName = "bbc.iplayer.android",
-            targets = listOf(AppTarget("1.0.1", 101, minSdk = 31)),
+            targets = listOf(
+                AppTarget(
+                    "1.0.1",
+                    101,
+                    minSdk = 31,
+                    description = "Android TV build. Use the Aurora Store walkthrough in Sources → UK TV Patches → Version.",
+                ),
+            ),
             formFactor = FormFactor.TV,
         ),
     )
